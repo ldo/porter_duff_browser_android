@@ -200,6 +200,29 @@ public class Main extends android.app.Activity
               } /*for*/
             DstImage = Bitmap.createBitmap(Pixels, ImageSize.x, ImageSize.y, Bitmap.Config.ARGB_8888);
           }
+          {
+            final int ThumbSize = (int)getResources().getDimension(R.dimen.smallthumbsize);
+            ((android.widget.ImageView)findViewById(R.id.srcimage)).setImageBitmap
+              (
+                Bitmap.createScaledBitmap
+                  (
+                    /*src =*/ SrcImage,
+                    /*width =*/ ThumbSize,
+                    /*height =*/ ThumbSize,
+                    /*filter =*/ true
+                  )
+              );
+            ((android.widget.ImageView)findViewById(R.id.dstimage)).setImageBitmap
+              (
+                Bitmap.createScaledBitmap
+                  (
+                    /*src =*/ DstImage,
+                    /*width =*/ ThumbSize,
+                    /*height =*/ ThumbSize,
+                    /*filter =*/ true
+                  )
+              );
+          }
         ((android.widget.Gallery)findViewById(R.id.gallery))
             .setAdapter(new ModeListAdapter());
       } /*onCreate*/

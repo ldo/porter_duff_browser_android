@@ -4,6 +4,36 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
 >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+    >
+        <ImageView
+            android:id="@+id/srcimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Source Image"
+            android:layout_below="@id/srcimage"
+        />
+        <ImageView
+            android:id="@+id/dstimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Destination Image"
+            android:layout_below="@id/dstimage"
+            android:layout_alignParentRight="true"
+        />
+    </RelativeLayout>
     <Gallery
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
