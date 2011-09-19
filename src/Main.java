@@ -33,22 +33,22 @@ public class Main extends android.app.Activity
         {
           /* new ModeEntry(PorterDuff.Mode.ADD, "ADD", "Saturate(S + D)"), */ /* Honeycomb-only */
             new ModeEntry(PorterDuff.Mode.CLEAR, "CLEAR", "[0, 0]"),
-            new ModeEntry(PorterDuff.Mode.DARKEN, "DARKEN", "[Sa + Da - Sa*Da, Sc*(1 - Da) + Dc*(1 - Sa) + min(Sc, Dc)]"),
+            new ModeEntry(PorterDuff.Mode.DARKEN, "DARKEN", "[Sa + Da - Sa*Da,\n Sc*(1 - Da) + Dc*(1 - Sa)\n + min(Sc, Dc)]"),
             new ModeEntry(PorterDuff.Mode.DST, "DST", "[Da, Dc]"),
-            new ModeEntry(PorterDuff.Mode.DST_ATOP, "DST_ATOP", "[Sa, Sa * Dc + Sc * (1 - Da)]"),
+            new ModeEntry(PorterDuff.Mode.DST_ATOP, "DST_ATOP", "[Sa,\n Sa * Dc + Sc * (1 - Da)]"),
             new ModeEntry(PorterDuff.Mode.DST_IN, "DST_IN", "[Sa * Da, Sa * Dc]"),
-            new ModeEntry(PorterDuff.Mode.DST_OUT, "DST_OUT", "[Da * (1 - Sa), Dc * (1 - Sa)]"),
-            new ModeEntry(PorterDuff.Mode.DST_OVER, "DST_OVER", "[Sa + (1 - Sa)*Da, Rc = Dc + (1 - Da)*Sc]"),
-            new ModeEntry(PorterDuff.Mode.LIGHTEN, "LIGHTEN", "[Sa + Da - Sa * Da, Sc * (1 - Da) + Dc * (1 - Sa) + max(Sc, Dc)]"),
+            new ModeEntry(PorterDuff.Mode.DST_OUT, "DST_OUT", "[Da * (1 - Sa),\n Dc * (1 - Sa)]"),
+            new ModeEntry(PorterDuff.Mode.DST_OVER, "DST_OVER", "[Sa + (1 - Sa)*Da,\n Rc = Dc + (1 - Da)*Sc]"),
+            new ModeEntry(PorterDuff.Mode.LIGHTEN, "LIGHTEN", "[Sa + Da - Sa * Da,\n Sc * (1 - Da) + Dc * (1 - Sa)\n + max(Sc, Dc)]"),
             new ModeEntry(PorterDuff.Mode.MULTIPLY, "MULTIPLY", "[Sa * Da, Sc * Dc]"),
           /* new ModeEntry(PorterDuff.Mode.OVERLAY, "OVERLAY", "?"), */ /* Honeycomb-only */
-            new ModeEntry(PorterDuff.Mode.SCREEN, "SCREEN", "[Sa + Da - Sa * Da, Sc + Dc - Sc * Dc]"),
+            new ModeEntry(PorterDuff.Mode.SCREEN, "SCREEN", "[Sa + Da - Sa * Da,\n Sc + Dc - Sc * Dc]"),
             new ModeEntry(PorterDuff.Mode.SRC, "SRC", "[Sa, Sc]"),
-            new ModeEntry(PorterDuff.Mode.SRC_ATOP, "SRC_ATOP", "[Da, Sc * Da + (1 - Sa) * Dc]"),
+            new ModeEntry(PorterDuff.Mode.SRC_ATOP, "SRC_ATOP", "[Da,\n Sc * Da + (1 - Sa) * Dc]"),
             new ModeEntry(PorterDuff.Mode.SRC_IN, "SRC_IN", "[Sa * Da, Sc * Da]"),
-            new ModeEntry(PorterDuff.Mode.SRC_OUT, "SRC_OUT", "[Sa * (1 - Da), Sc * (1 - Da)]"),
-            new ModeEntry(PorterDuff.Mode.SRC_OVER, "SRC_OVER", "[Sa + (1 - Sa) * Da, Rc = Sc + (1 - Sa) * Dc]"),
-            new ModeEntry(PorterDuff.Mode.XOR, "XOR", "[Sa + Da - 2 * Sa * Da, Sc * (1 - Da) + (1 - Sa) * Dc]"),
+            new ModeEntry(PorterDuff.Mode.SRC_OUT, "SRC_OUT", "[Sa * (1 - Da),\n Sc * (1 - Da)]"),
+            new ModeEntry(PorterDuff.Mode.SRC_OVER, "SRC_OVER", "[Sa + (1 - Sa) * Da,\n Rc = Sc + (1 - Sa) * Dc]"),
+            new ModeEntry(PorterDuff.Mode.XOR, "XOR", "[Sa + Da - 2 * Sa * Da,\n Sc * (1 - Da) + (1 - Sa) * Dc]"),
         };
 
     private class ModeListAdapter extends android.widget.BaseAdapter
@@ -78,7 +78,7 @@ public class Main extends android.app.Activity
                     Draw.drawBitmap(SrcImage, 0, 0, Compose);
                     Image.prepareToDraw();
                   }
-                Title = String.format("%s: %s", Mode.Name, Mode.Formula);
+                Title = String.format("%s\n%s", Mode.Name, Mode.Formula);
               } /*ModeItem*/
           } /*ModeItem*/
 
@@ -131,8 +131,9 @@ public class Main extends android.app.Activity
             if (TheView == null)
               {
                 TheView = getLayoutInflater().inflate(R.layout.image_view, null);
-              /* TheView.setMinimumHeight(ImageSize.y * 6 / 5); */ /* try without first */
-                  /* try to leave room for title */
+                TheView.setMinimumWidth(ImageSize.x * 5 / 4);
+                TheView.setMinimumHeight(ImageSize.y * 3 / 2);
+                  /* try to leave room for title text */
               } /*if*/
             final android.widget.ImageView TheImage =
                 (android.widget.ImageView)TheView.findViewById(R.id.image_view);
