@@ -33,12 +33,12 @@ public class Main extends android.app.Activity
         {
           /* new ModeEntry(PorterDuff.Mode.ADD, "ADD", "Saturate(S + D)"), */ /* Honeycomb-only */
             new ModeEntry(PorterDuff.Mode.CLEAR, "CLEAR", "[0, 0]"),
-            new ModeEntry(PorterDuff.Mode.DARKEN, "DARKEN", "[Sa + Da - Sa*Da,\n Sc*(1 - Da) + Dc*(1 - Sa)\n + min(Sc, Dc)]"),
+            new ModeEntry(PorterDuff.Mode.DARKEN, "DARKEN", "[Sa + Da - Sa * Da,\n Sc * (1 - Da) + Dc * (1 - Sa)\n + min(Sc, Dc)]"),
             new ModeEntry(PorterDuff.Mode.DST, "DST", "[Da, Dc]"),
             new ModeEntry(PorterDuff.Mode.DST_ATOP, "DST_ATOP", "[Sa,\n Sa * Dc + Sc * (1 - Da)]"),
             new ModeEntry(PorterDuff.Mode.DST_IN, "DST_IN", "[Sa * Da, Sa * Dc]"),
             new ModeEntry(PorterDuff.Mode.DST_OUT, "DST_OUT", "[Da * (1 - Sa),\n Dc * (1 - Sa)]"),
-            new ModeEntry(PorterDuff.Mode.DST_OVER, "DST_OVER", "[Sa + (1 - Sa)*Da,\n Rc = Dc + (1 - Da)*Sc]"),
+            new ModeEntry(PorterDuff.Mode.DST_OVER, "DST_OVER", "[Sa + (1 - Sa) * Da,\n Rc = Dc + (1 - Da) * Sc]"),
             new ModeEntry(PorterDuff.Mode.LIGHTEN, "LIGHTEN", "[Sa + Da - Sa * Da,\n Sc * (1 - Da) + Dc * (1 - Sa)\n + max(Sc, Dc)]"),
             new ModeEntry(PorterDuff.Mode.MULTIPLY, "MULTIPLY", "[Sa * Da, Sc * Dc]"),
           /* new ModeEntry(PorterDuff.Mode.OVERLAY, "OVERLAY", "?"), */ /* Honeycomb-only */
