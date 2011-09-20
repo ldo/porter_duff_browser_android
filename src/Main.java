@@ -65,6 +65,28 @@ public class Main extends android.app.Activity
             new ModeEntry(PorterDuff.Mode.XOR, "XOR", "[Sa + Da - 2 * Sa * Da,\n Sc * (1 - Da) + (1 - Sa) * Dc]"),
         };
 
+    static int Color
+      (
+      /* all in range [0.0 .. 1.0] */
+        float Alpha,
+        float R,
+        float G,
+        float B
+      )
+      /* constructs a colour value from the specified components. */
+      {
+      /* Note components have pre-multiplied alpha, since this is
+        how the Porter-Duff modes are defined */
+        return
+                (int)(Alpha * 255) << 24
+            |
+                (int)(R * Alpha * 255) << 16
+            |
+                (int)(G * Alpha * 255) << 8
+            |
+                (int)(B * Alpha * 255);
+      } /*Color*/
+
     private class ModeListAdapter extends android.widget.BaseAdapter
       {
 
@@ -181,17 +203,14 @@ public class Main extends android.app.Activity
               {
                 for (int col = 0; col < ImageSize.x; ++col)
                   {
-                    final float Alpha = (float)(ImageSize.y - row) / ImageSize.y;
-                  /* note components have pre-multiplied alpha, since this is
-                    how the Porter-Duff modes are defined */
                     Pixels[dst++] =
-                            (int)(Alpha * 255) << 24 /* alpha */
-                        |
-                            (int)((ImageSize.x - col) * Alpha / ImageSize.x * 255) << 16 /* red */
-                        |
-                            (int)((ImageSize.x - col) * Alpha / ImageSize.x * 255) << 8 /* green */
-                        |
-                            (int)(col * Alpha * 255) / ImageSize.x /* blue */;
+                        Color
+                          (
+                            /*Alpha =*/ (float)(ImageSize.y - row) / ImageSize.y,
+                            /*R =*/ (float)(ImageSize.x - col) / ImageSize.x,
+                            /*G =*/ (float)(ImageSize.x - col) / ImageSize.x,
+                            /*B =*/ (float)col / ImageSize.x
+                          );
                   } /*for*/
               } /*for*/
             SrcImage = Bitmap.createBitmap(Pixels, ImageSize.x, ImageSize.y, Bitmap.Config.ARGB_8888);
@@ -205,17 +224,14 @@ public class Main extends android.app.Activity
               {
                 for (int col = 0; col < ImageSize.x; ++col)
                   {
-                    final float Alpha = (float)(ImageSize.x - col) / ImageSize.x;
-                  /* note components have pre-multiplied alpha, since this is
-                    how the Porter-Duff modes are defined */
                     Pixels[dst++] =
-                            (int)(Alpha * 255) << 24 /* alpha */
-                        |
-                            (int)((ImageSize.y - row) * Alpha / ImageSize.x * 255) << 16 /* red */
-                        |
-                            (int)(row * Alpha / ImageSize.y * 255) << 8 /* green */
-                        |
-                            (int)(row * Alpha / ImageSize.y * 255) /* blue */;
+                        Color
+                          (
+                            /*Alpha =*/ (float)(ImageSize.x - col) / ImageSize.x,
+                            /*R =*/ (float)(ImageSize.y - row) / ImageSize.x,
+                            /*G =*/ (float)row / ImageSize.y,
+                            /*B =*/ (float)row / ImageSize.y
+                          );
                   } /*for*/
               } /*for*/
             DstImage = Bitmap.createBitmap(Pixels, ImageSize.x, ImageSize.y, Bitmap.Config.ARGB_8888);
