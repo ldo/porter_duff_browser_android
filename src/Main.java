@@ -181,14 +181,17 @@ public class Main extends android.app.Activity
               {
                 for (int col = 0; col < ImageSize.x; ++col)
                   {
+                    final float Alpha = (float)(ImageSize.y - row) / ImageSize.y;
+                  /* note components have pre-multiplied alpha, since this is
+                    how the Porter-Duff modes are defined */
                     Pixels[dst++] =
-                            (ImageSize.y - row) * 255 / ImageSize.y << 24 /* alpha */
+                            (int)(Alpha * 255) << 24 /* alpha */
                         |
-                            (ImageSize.x - col) * 255 / ImageSize.x << 16 /* red */
+                            (int)((ImageSize.x - col) * Alpha / ImageSize.x * 255) << 16 /* red */
                         |
-                            (ImageSize.x - col) * 255 / ImageSize.x << 8 /* green */
+                            (int)((ImageSize.x - col) * Alpha / ImageSize.x * 255) << 8 /* green */
                         |
-                            col * 255 / ImageSize.x /* blue */;
+                            (int)(col * Alpha * 255) / ImageSize.x /* blue */;
                   } /*for*/
               } /*for*/
             SrcImage = Bitmap.createBitmap(Pixels, ImageSize.x, ImageSize.y, Bitmap.Config.ARGB_8888);
@@ -202,14 +205,17 @@ public class Main extends android.app.Activity
               {
                 for (int col = 0; col < ImageSize.x; ++col)
                   {
+                    final float Alpha = (float)(ImageSize.x - col) / ImageSize.x;
+                  /* note components have pre-multiplied alpha, since this is
+                    how the Porter-Duff modes are defined */
                     Pixels[dst++] =
-                            (ImageSize.x - col) * 255 / ImageSize.x << 24 /* alpha */
+                            (int)(Alpha * 255) << 24 /* alpha */
                         |
-                            (ImageSize.y - row) * 255 / ImageSize.x << 16 /* red */
+                            (int)((ImageSize.y - row) * Alpha / ImageSize.x * 255) << 16 /* red */
                         |
-                            row * 255 / ImageSize.y << 8 /* green */
+                            (int)(row * Alpha / ImageSize.y * 255) << 8 /* green */
                         |
-                            row * 255 / ImageSize.y /* blue */;
+                            (int)(row * Alpha / ImageSize.y * 255) /* blue */;
                   } /*for*/
               } /*for*/
             DstImage = Bitmap.createBitmap(Pixels, ImageSize.x, ImageSize.y, Bitmap.Config.ARGB_8888);
