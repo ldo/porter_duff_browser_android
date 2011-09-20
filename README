@@ -1,6 +1,9 @@
 Porter-Duff Browser is a sample Android application that displays the
 effect of the various options available for an
-android.graphics.PorterDuffXfermode.
+android.graphics.PorterDuffXfermode. The display shows the source and
+destination sample images (simple colour-alpha ramps), and underneath
+that a scrolling list of the effects of the different modes on those
+images.
 
 Contents:
     src/ -- Java sources for the Android app
