@@ -217,8 +217,6 @@ public class Main extends android.app.Activity
           }
           {
             final int[] Pixels = new int[ImageSize.x * ImageSize.y];
-            final int Color1 = 0xff0000;
-            final int Color2 = 0x00ff00;
             int dst = 0;
             for (int row = 0; row < ImageSize.y; ++row)
               {
