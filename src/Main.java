@@ -192,6 +192,13 @@ public class Main extends android.app.Activity
         super.onCreate(SavedInstanceState);
         setContentView(R.layout.main);
           {
+          /* set higher-quality window pixel format to reduce banding */
+            final android.view.Window Window = getWindow();
+            final android.view.WindowManager.LayoutParams LayoutParams = Window.getAttributes();
+            LayoutParams.format = android.graphics.PixelFormat.RGBA_8888; /* not default pre-Gingerbread */
+            Window.setAttributes(LayoutParams);
+          }
+          {
             final int ThumbSize = (int)getResources().getDimension(R.dimen.thumbsize);
             System.err.printf("Thumbsize = %d*%d\n", ThumbSize, ThumbSize); /* debug */
             ImageSize = new android.graphics.Point(ThumbSize, ThumbSize);
