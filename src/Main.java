@@ -195,6 +195,7 @@ public class Main extends android.app.Activity
           /* set higher-quality window pixel format to reduce banding */
             final android.view.Window Window = getWindow();
             final android.view.WindowManager.LayoutParams LayoutParams = Window.getAttributes();
+            System.err.printf("PorterDuff.Main: initial window pixel format = %d\n", LayoutParams.format); /* debug */
             LayoutParams.format = android.graphics.PixelFormat.RGBA_8888; /* not default pre-Gingerbread */
             Window.setAttributes(LayoutParams);
           }
