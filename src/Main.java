@@ -2,7 +2,7 @@ package nz.gen.geek_central.porter_duff_browser;
 /*
     Demonstration of the effect of the various Porter-Duff transfer modes.
 
-    Copyright 2011 by Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
+    Copyright 2011, 2012 by Lawrence D'Oliveiro <ldo@geek-central.gen.nz>.
 
     Licensed under the Apache License, Version 2.0 (the "License"); you may not
     use this file except in compliance with the License. You may obtain a copy of
@@ -45,7 +45,6 @@ public class Main extends android.app.Activity
 
     public static final ModeEntry[] Modes =
         {
-          /* new ModeEntry(PorterDuff.Mode.ADD, "ADD", "Saturate(S + D)"), */ /* Honeycomb-only */
             new ModeEntry(PorterDuff.Mode.CLEAR, "CLEAR", "[0, 0]"),
             new ModeEntry(PorterDuff.Mode.DARKEN, "DARKEN", "[Sa + Da - Sa * Da,\n Sc * (1 - Da) + Dc * (1 - Sa)\n + min(Sc, Dc)]"),
             new ModeEntry(PorterDuff.Mode.DST, "DST", "[Da, Dc]"),
@@ -64,6 +63,15 @@ public class Main extends android.app.Activity
             new ModeEntry(PorterDuff.Mode.SRC_OVER, "SRC_OVER", "[Sa + (1 - Sa) * Da,\n Rc = Sc + (1 - Sa) * Dc]"),
             new ModeEntry(PorterDuff.Mode.XOR, "XOR", "[Sa + Da - 2 * Sa * Da,\n Sc * (1 - Da) + (1 - Sa) * Dc]"),
         };
+
+    static class ModesExtra
+      /* extra modes only available in Honeycomb and later */
+      {
+        public static final ModeEntry[] Modes =
+            {
+                new ModeEntry(PorterDuff.Mode.ADD, "ADD", "Saturate(S + D)"), /* Honeycomb-only */
+            };
+      } /*ModesExtra*/
 
     static int Color
       (
@@ -122,11 +130,48 @@ public class Main extends android.app.Activity
 
         public ModeListAdapter()
           {
-            Items = new ModeItem[Modes.length];
+            final java.util.TreeSet<ModeEntry> SortedModes = new java.util.TreeSet<ModeEntry>
+              (
+                new java.util.Comparator<ModeEntry>()
+                  {
+                    @Override
+                    public int compare
+                      (
+                        ModeEntry Mode1,
+                        ModeEntry Mode2
+                      )
+                      {
+                        return
+                            Mode1.Name.compareTo(Mode2.Name);
+                      } /*compare*/
+                  } /*Comparator*/
+              );
             for (int i = 0; i < Modes.length; ++i)
               {
-                Items[i] = new ModeItem(Modes[i]);
-              } /*for*/
+                SortedModes.add(Modes[i]);
+              }
+            try
+              {
+                final ModeEntry[] ExtraModes = ModesExtra.Modes;
+                for (int i = 0; i < ExtraModes.length; ++i)
+                  {
+                    SortedModes.add(ExtraModes[i]);
+                  }
+              }
+            catch (NoClassDefFoundError TooOld)
+              {
+              }
+            catch (ExceptionInInitializerError TooOld)
+              {
+              } /*catch*/
+              {
+                Items = new ModeItem[SortedModes.size()];
+                int i = 0;
+                for (ModeEntry Mode : SortedModes)
+                  {
+                    Items[i++] = new ModeItem(Mode);
+                  } /*for*/
+              }
           } /*ModeListAdapter*/
 
         @Override
