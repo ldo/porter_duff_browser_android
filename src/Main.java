@@ -54,7 +54,6 @@ public class Main extends android.app.Activity
             new ModeEntry(PorterDuff.Mode.DST_OVER, "DST_OVER", "[Sa + (1 - Sa) * Da,\n Rc = Dc + (1 - Da) * Sc]"),
             new ModeEntry(PorterDuff.Mode.LIGHTEN, "LIGHTEN", "[Sa + Da - Sa * Da,\n Sc * (1 - Da) + Dc * (1 - Sa)\n + max(Sc, Dc)]"),
             new ModeEntry(PorterDuff.Mode.MULTIPLY, "MULTIPLY", "[Sa * Da, Sc * Dc]"),
-          /* new ModeEntry(PorterDuff.Mode.OVERLAY, "OVERLAY", "?"), */ /* Honeycomb-only */
             new ModeEntry(PorterDuff.Mode.SCREEN, "SCREEN", "[Sa + Da - Sa * Da,\n Sc + Dc - Sc * Dc]"),
             new ModeEntry(PorterDuff.Mode.SRC, "SRC", "[Sa, Sc]"),
             new ModeEntry(PorterDuff.Mode.SRC_ATOP, "SRC_ATOP", "[Da,\n Sc * Da + (1 - Sa) * Dc]"),
@@ -70,6 +69,7 @@ public class Main extends android.app.Activity
         public static final ModeEntry[] Modes =
             {
                 new ModeEntry(PorterDuff.Mode.ADD, "ADD", "Saturate(S + D)"), /* Honeycomb-only */
+                new ModeEntry(PorterDuff.Mode.OVERLAY, "OVERLAY", "?"), /* Honeycomb-only */
             };
       } /*ModesExtra*/
 
