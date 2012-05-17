@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Porter-Duff Transfer-Mode Browser</string>
+    <string name="source_image">Source Image</string>
+    <string name="dest_image">Destination Image</string>
 </resources>
