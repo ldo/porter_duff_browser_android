@@ -15,4 +15,7 @@ Contents:
     INSTALL -- build/installation instructions
     LICENSE -- licence (Apache 2.0, same as Google's sample code)
 
+A prebuilt binary is available in the Google Play store here
+<https://play.google.com/store/apps/details?id=nz.gen.geek_central.porter_duff_browser>.
+
 Lawrence D'Oliveiro <ldo@geek-central.gen.nz>
