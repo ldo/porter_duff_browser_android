@@ -312,6 +312,31 @@ public class Main extends android.app.Activity
           }
         ((android.widget.Gallery)findViewById(R.id.gallery))
             .setAdapter(new ModeListAdapter());
+        ((android.widget.Button)findViewById(R.id.source_code_link))
+            .setOnClickListener
+              (
+                new android.view.View.OnClickListener()
+                  {
+                    public void onClick
+                      (
+                        android.view.View TheButton
+                      )
+                      {
+                      /* open source-code repo in browser */
+                        startActivity
+                          (
+                            new android.content.Intent
+                              (
+                                android.content.Intent.ACTION_VIEW,
+                                new android.net.Uri.Builder()
+                                    .scheme("https")
+                                    .encodedPath("//github.com/ldo/porter_duff_browser_android")
+                                    .build()
+                              )
+                          );
+                      } /*onClick*/
+                  } /*View.OnClickListener*/
+              );
       } /*onCreate*/
 
   } /*Main*/
